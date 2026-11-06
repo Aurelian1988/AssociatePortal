@@ -2,16 +2,15 @@ import { defineConfig } from "vite"
 import vue from "@vitejs/plugin-vue"
 import frappeui from "frappe-ui/vite"
 import path from "path"
-import fs from "fs"
 
 export default defineConfig({
 	base: "/assets/onemotion/associate_portal/",
 	server: {
-		port: 8081,
+		port: 8080,
 		proxy: getProxyOptions(),
 		allowedHosts: true,
 	},
-	plugins: [vue(), frappeui()],
+	plugins: [vue(), frappeui({ port: 8080, source: "^$" })],
 	resolve: {
 		alias: {
 			"@": path.resolve(__dirname, "src"),
