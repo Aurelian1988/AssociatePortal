@@ -1,0 +1,28 @@
+{
+	"name": "OneMotion Associate Portal",
+	"short_name": "OneMotion",
+	"description": "Associate portal for OneMotion drivers and associates",
+	"start_url": "/associate",
+	"scope": "/associate",
+	"display": "standalone",
+	"orientation": "portrait",
+	"theme_color": "#1a5276",
+	"background_color": "#f9fafb",
+	"icons": [
+		{
+			"src": "/files/app-icon-192.png?v=2",
+			"sizes": "192x192",
+			"type": "image/png",
+			"purpose": "any maskable"
+		},
+		{
+			"src": "/files/app-icon-512.png?v=2",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	],
+	"categories": ["business", "productivity"],
+	"lang": "en",
+	"dir": "ltr"
+}

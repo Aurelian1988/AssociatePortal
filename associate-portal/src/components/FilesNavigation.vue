@@ -1,0 +1,3 @@
+<template><nav class="files-tabs" aria-label="Files categories"><router-link to="/documents" :aria-current="route.path==='/documents'?'page':undefined">Documents</router-link><router-link to="/agreements" :aria-current="route.path==='/agreements'?'page':undefined">Agreements</router-link></nav></template>
+<script setup>import {useRoute} from 'vue-router';const route=useRoute()</script>
+<style scoped>.files-tabs{display:flex;margin:1rem 1rem 0;padding:4px;background:#edf1f5;border-radius:10px;gap:4px}.files-tabs a{flex:1;padding:.65rem;text-align:center;font-size:.85rem;color:#536170;border-radius:7px}.files-tabs a[aria-current]{background:white;color:#a61d1d;box-shadow:0 1px 4px #0001}</style>

@@ -1,0 +1,5 @@
+<template><aside v-if="jobs.length" class="signing-status" role="status"><p v-for="job in jobs" :key="job.name">{{ labels[job.request_description] }}: {{ job.status==='Completed'?'Signed documents saved.':job.status==='Failed'?'Could not finish signing. Open Agreements to try again.':'Signature received. Preparing documents—you can keep using the app.' }}</p></aside></template>
+<script setup>
+import {ref,onMounted,onBeforeUnmount} from 'vue';import {frappeRequest} from 'frappe-ui';const jobs=ref([]),labels={pack:'Compliance pack',sba:'Self Billing',peak:'Peak agreement',dld:'EU licence declaration'};let timer,stopped=false;async function poll(){try{const r=await frappeRequest({url:'/api/method/onemotion.api.profile_signing_jobs.status'});if(!stopped)jobs.value=((r?.message??r)||[]).filter(job=>job.status!=='Completed')}catch{}if(!stopped)timer=setTimeout(poll,5000)}onMounted(poll);onBeforeUnmount(()=>{stopped=true;clearTimeout(timer)})
+</script>
+<style scoped>.signing-status{padding:8px 12px;background:#eff6ff;color:#075da8;font-size:12px}.signing-status p{margin:4px 0}</style>

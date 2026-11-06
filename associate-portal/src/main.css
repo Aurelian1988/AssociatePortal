@@ -1,0 +1,52 @@
+@import "frappe-ui/src/style.css";
+
+/* ─── General ─────────────────────────────────────────────────────────── */
+
+input:disabled {
+	--webkit-text-fill-color: var(--tw-text-color);
+	opacity: 0.9;
+	color: var(--tw-text-color);
+}
+
+input::-webkit-date-and-time-value {
+	text-align: left;
+}
+
+body {
+	-webkit-tap-highlight-color: transparent;
+	/* Prevent overscroll bounce on iOS standalone */
+	overscroll-behavior: none;
+}
+
+/* Prevent text selection on interactive elements in PWA */
+.no-select {
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+@keyframes slide-up {
+	from {
+		transform: translateY(100%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+.animate-slide-up {
+	animation: slide-up 0.3s ease-out;
+}
+
+/* Requested compact scale: rem-based typography and spacing are 25% smaller. */
+html { font-size: 75%; }
+body { font-size: 1rem; }
+:root { --ion-font-size: 12px; }

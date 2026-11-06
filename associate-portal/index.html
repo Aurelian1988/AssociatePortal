@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=resizes-content"
+		/>
+		<title>OneMotion Associate Portal</title>
+
+		<!-- PWA Manifest -->
+		<link rel="manifest" href="/files/manifest.json" />
+
+		<!-- Theme & Colors -->
+		<meta name="theme-color" content="#a61d1d" />
+		<meta name="msapplication-TileColor" content="#a61d1d" />
+
+		<!-- Apple PWA -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="OneMotion" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/files/apple-touch-icon.png?v=2" />
+
+		<!-- Favicons -->
+		<link rel="icon" type="image/svg+xml" href="/files/onemotion-icon.svg?v=2" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/files/favicon-32x32.png?v=2" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/files/favicon-16x16.png?v=2" />
+
+		<!-- Mobile app meta -->
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="application-name" content="OneMotion" />
+		<meta name="description" content="Associate portal for OneMotion drivers and associates" />
+	</head>
+	<body class="antialiased">
+		<div id="app"></div>
+		<div id="modals"></div>
+		<div id="popovers"></div>
+
+		<!-- boot-script-start -->
+		<script>
+			window.csrf_token = window.csrf_token || "dev"
+			window.site_name = window.site_name || "localhost"
+			if (!window.frappe) window.frappe = {}
+			if (!frappe.boot) frappe.boot = {}
+		</script>
+		<!-- boot-script-end -->
+
+		<!-- Service Worker Registration -->
+		<script>
+			if ("serviceWorker" in navigator) {
+				// Auto-reload once when a NEW service worker takes control, so
+				// users always get the latest build without manually closing the app.
+				var swRefreshing = false
+				navigator.serviceWorker.addEventListener("controllerchange", function () {
+					if (swRefreshing) return
+					swRefreshing = true
+					window.location.reload()
+				})
+
+				window.addEventListener("load", function () {
+					navigator.serviceWorker
+						.register("/files/sw.js", { scope: "/associate" })
+						.then(function (reg) {
+							console.log("SW registered, scope:", reg.scope)
+							// Proactively check for a new SW on every load.
+							reg.update()
+						})
+						.catch(function (err) {
+							console.log("SW registration failed:", err)
+						})
+				})
+			}
+		</script>
+
+		<script type="module" src="/src/main.js"></script>
+	</body>
+</html>

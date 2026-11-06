@@ -1,0 +1,5 @@
+Current local development source snapshot. Includes Vue frontend, local Python backend modules, tests, public assets and build configuration.
+Install dependencies using yarn install; test build: yarn vite build --config vite.erp-test.config.js.
+Backend modules require the existing One Motion Frappe/ERP app, DocTypes, permissions and other server modules. This is not a complete standalone ERP backup.
+Excluded: credentials, environment configuration, node_modules, uploaded driver files, generated signed documents, temporary captures and local connection infrastructure.
+Work and Credentials are placeholders pending configuration. Some legacy local files may differ from the deployed ERP versions.

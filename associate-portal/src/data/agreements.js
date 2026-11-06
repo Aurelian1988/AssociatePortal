@@ -1,0 +1,5 @@
+import {frappeRequest} from 'frappe-ui'
+const call=async(method,params={})=>{const r=await frappeRequest({url:'/api/method/'+method,params});return r?.message??r}
+export const listAgreements=()=>call('onemotion.api.associate_portal.get_associate_agreements')
+export const readAgreement=item=>item.field==='peak_joining_2026'?call('onemotion.api.profile_peak_agreement.read'):item.source==='WebDoc'?call('onemotion.api.issued_agreements.open_issued',{webdoc_id:item.webdoc_id}):call(['sba_agrement','dld_agrement'].includes(item.field)?'onemotion.api.profile_agreement_pack.read_single':'onemotion.api.portal_agreement_signing.read_agreement',{field:item.field})
+export const signAgreement=(item,data)=>['peak_joining_2026','sba_agrement','dld_agrement'].includes(item.field)?call('onemotion.api.profile_signing_jobs.submit',{kind:item.field==='peak_joining_2026'?'peak':item.field==='dld_agrement'?'dld':'sba',payload:data}):call('onemotion.api.portal_agreement_signing.submit_agreement',{field:item.field,...data})
